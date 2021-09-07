@@ -1,0 +1,31 @@
+class Queue():
+    def __init__(self):
+        self.queue = []
+    #add the elememnt 
+    
+    def enqueue(self,item):
+        self.queue.append(item)
+        return self.queue
+    
+    #delete a elememnt from the first/starting 
+    def dequeue(self):
+        if len(self.queue) < 1 :
+            print("empty")
+        self.queue.pop(0)
+        return self.queue
+    
+    #display 
+    def display(self):
+        return self.queue
+
+#create object for class 
+q = Queue()
+q.enqueue(1)
+for i in range(2,7):
+    q.enqueue(i)
+q.display()
+q.dequeue()
+q.dequeue()
+for i in range(4):
+    q.dequeue()
+q.display()
