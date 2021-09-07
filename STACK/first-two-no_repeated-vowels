@@ -1,0 +1,14 @@
+from collections import Counter
+def Nonrepeated(string):
+    freq = Counter(string)
+
+    for i in string:
+        if i in vowels :
+            if(freq[i] == 1):
+                print(i)
+                
+vowels = ['a','e','i','o','u']
+string = str(input())
+string.lower()
+
+Nonrepeated(string)
