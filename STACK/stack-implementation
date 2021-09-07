@@ -1,0 +1,31 @@
+def create():
+    stack = []
+    return stack 
+
+def check():
+    print(stack)
+    return len(stack)==0
+
+def push(stack,item):
+    stack.append(item)
+    return stack
+
+def pop(stack):
+    if len(stack)==0:
+        print("empty")
+    return stack.pop()
+
+
+stack = []
+push(stack , 2)
+push(stack ,3)
+for i in range(4,7):
+    push(stack,i)
+print(push(stack,9))
+
+pop(stack)
+pop(stack)
+check()
+
+#For the array-based implementation of a stack, the push and pop operations take constant time, i.e. O(1).
+#Not used any for loop in array-stack impelmetation.
