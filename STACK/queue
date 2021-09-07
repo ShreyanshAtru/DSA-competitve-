@@ -29,3 +29,6 @@ q.dequeue()
 for i in range(4):
     q.dequeue()
 q.display()
+
+#Compexity of enqueue and dequeue in array --> O(1)
+#if we use python pop(n) then it will be --> O(N)
