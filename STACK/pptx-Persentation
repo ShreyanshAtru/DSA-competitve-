@@ -1,0 +1,70 @@
+from wand.image import Image
+import os
+os.chdir('E:\python\python_script')
+# Import display to display final image
+from wand.display import display
+
+with Image(filename = 'nike_black.png') as nike :
+    nike.transform(resize = 'x40')
+    nike.save(filename='nike.png')
+    display(nike)
+
+
+with Image(filename = 'image2.jpg') as image22 :
+    image22.transform(resize = 'x400')
+    image22.save(filename='image22.jpg')
+    display(image22)
+    
+with Image(filename = 'image3.jpg') as image33 :
+    image33.transform(resize = 'x250')
+    image33.save(filename='image33.jpg')
+
+
+from pptx import Presentation
+from pptx.util import Inches
+pr2 = Presentation()
+slide_register = pr2.slide_layouts[1]
+slide = pr2.slides.add_slide(slide_register)
+
+
+slide1 = pr2.slides.add_slide(slide_register)
+img = 'transform3.jpg'
+from_top = Inches(1)
+from_left = Inches(1)
+add_picture = slide1.shapes.add_picture(img , from_left,from_top)
+img2 = 'nike.png'
+from_top = Inches(1.5)
+from_left = Inches(1.2)
+add_picture = slide1.shapes.add_picture(img2 , from_left , from_top)
+title = slide1.shapes.title
+subtitle = slide1.placeholders[1]
+title.text = "Hello, World!"
+subtitle.text = "python-pptx was here!"
+
+
+
+slide2 = pr2.slides.add_slide(slide_register)
+img = 'image2.jpg'
+from_top = Inches(1)
+from_left = Inches(1)
+add_picture = slide2.shapes.add_picture(img , from_left,from_top)
+img2 = 'nike.png'
+from_top = Inches(1.5)
+from_left = Inches(1.2)
+add_picture = slide2.shapes.add_picture(img2 , from_left , from_top)
+
+
+slide3 = pr2.slides.add_slide(slide_register)
+img = 'image33.jpg'
+from_top = Inches(2)
+from_left = Inches(0.5)
+add_picture = slide3.shapes.add_picture(img , from_left,from_top)
+img2 = 'nike.png'
+from_top = Inches(2)
+from_left = Inches(0.7)
+add_picture = slide3.shapes.add_picture(img2 , from_left , from_top)
+
+
+
+
+pr2.save('pr2.pptx')
