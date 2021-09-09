@@ -1,39 +1,51 @@
+from wand.display import display , Image
+from pptx import Presentation
 import os
-
-from pptx import Presentation
-from pptx.util import Inches
+from pptx.util import Inches 
 os.chdir('E:\python\python_script')
-from wand.display import display
-def convert(i):
-    with Image(filename = img[i]) as nike :
-        nike.transform(resize = 'x200')
-        nike.save(filename='nike.png')
-        display(nike)
-        
-    slide1 = jayesh.slides.add_slide(slide_layout)
-    title = slide1.shapes.title
-    subtitle = slide1.placeholders[1]
-    title.text = "Hello, World!"
-    subtitle.text = img[i]
-    
-#     title = slide1.shapes.title
-#     subtitle = slide1.placeholders[1]
-#     title.text = "Hello, World!"
-#     subtitle.text = "python-pptx was here!"
-        
-    
+#Resize images
+def resizeImages():
+    convert('nike_black.png', 'transformed_Nike.png', 'x30')
+    for i in range(1,6) :
+        i = str(i)
+        imageName = 'image'+i+'.jpg'
+        transformedImageName = 'transformedImage_'+i+'.png'
+        size = 'x300'
+        convert(imageName, transformedImageName, size)
 
-img = ['image1.jpg','image2.jpg' , 'image3.jpg']
-for i in range(len(img)) :
-    convert(i)
+def convert(imageName, transformedImageName, size):
+    with Image(filename = imageName) as image :
+        image.transform(resize = size)
+        image.save(filename=transformedImageName)
+        display(image)
 
+        
 from pptx import Presentation
 from pptx.util import Inches
-jayesh = Presentation()
-slide_layout = jayesh.slide_layouts[1]
-##slide = jayesh.slides.add_slide(slide_layout)
 
 
+def ppt_create():
+    ppt = Presentation()
+    slide_register = ppt.slide_layouts[1]
+    for i in range(1,6):
+        slide_create(ppt, slide_register, str(i))
+    ppt.save('Presentation.pptx')
 
+def slide_create(ppt, slideRegister, slideNumber):
+    slide = ppt.slides.add_slide(slideRegister)
+    img = 'transformedImage_'+slideNumber+'.png'
+    from_top = Inches(3)
+    from_left = Inches(1)
+    add_picture = slide.shapes.add_picture(img , from_left,from_top)
+    img2 = 'transformed_Nike.png'
+    from_top = Inches(3.3)
+    from_left = Inches(1.2)
+    add_picture = slide.shapes.add_picture(img2 , from_left , from_top)
+    title = slide.shapes.title
+    subtitle = slide.placeholders[1]
+    title.text = "Hello, This is Slide " + slideNumber
+    subtitle.text = "python-pptx was here!"
 
-jayesh.save('jayesh.pptx')
+    
+resizeImages()
+ppt_create()
